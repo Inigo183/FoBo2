@@ -1,0 +1,2 @@
+fobo:led
+-DCATKIN_DEVEL_PREFIX=/rasp_ws/devel -DCMAKE_INSTALL_PREFIX=/rasp_ws/install -G Unix Makefiles

@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /rasp_ws/devel/setup.sh
