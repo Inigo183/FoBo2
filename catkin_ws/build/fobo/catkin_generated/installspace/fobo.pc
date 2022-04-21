@@ -1,0 +1,8 @@
+prefix=/rasp_ws/install
+
+Name: fobo
+Description: Description of fobo
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: rospy std_msgs message_runtime
