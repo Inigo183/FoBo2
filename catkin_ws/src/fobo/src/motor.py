@@ -2,33 +2,68 @@ import RPi.GPIO as GPIO
 
 
 class Motor():
+    '''
+        Constructor function
+        @params: 
+            pinA (int): pin number for direction 1 "IN1"
+            pinB (int): pin number for direction 2 "IN2"
+            en (int): pin number for speed motor, EN
+        @return: None
+    '''
     def __init__(self, pinA, pinB, en):
         self.pinA = pinA
         self.pinB = pinB
         self.speed = 50
-
+        # Set up output pins
         GPIO.setup(self.pinA, GPIO.OUT)
         GPIO.setup(self.pinB, GPIO.OUT)
         GPIO.setup(en, GPIO.OUT)
+        # Set up pwm output
         self.p = p=GPIO.PWM(en,1000)
         self.p.start(self.speed)
-        
-        self.valueA = GPIO.LOW
-        self.valueA = GPIO.LOW
 
 
+    '''
+    Table to set up direction motor
+                FORWARD BACKWARD    STOP
+        pinA    HIGH    LOW         LOW
+        pinB    LOW     HIGH        LOW
+    '''
+
+
+    '''
+        set up motor in forward sense according to table
+        @params: None
+        @return: None
+    '''
     def forward(self):
         GPIO.output(self.pinA, GPIO.HIGH)
         GPIO.output(self.pinB, GPIO.LOW)
 
+    '''
+        set up motor in backward sense according to table
+        @params: None
+        @return: None
+    '''
     def backward(self):
         GPIO.output(self.pinA, GPIO.LOW)
         GPIO.output(self.pinB, GPIO.HIGH)
 
+    '''
+        stop motors according to table
+        @params: None
+        @return: None
+    '''
     def stop(self):
         GPIO.output(self.pinA, GPIO.LOW)
         GPIO.output(self.pinB, GPIO.LOW)
 
+    '''
+        Change motor speed byt changing Duty Cycle in pwm output
+        @params:
+            speed (int 0-100): DT meaning speed
+        @return: None
+    '''
     def change_speed(self, speed):
         if speed > 100:
             self.speed = 100
